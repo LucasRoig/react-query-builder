@@ -35,8 +35,9 @@ export type StringArrayCondition<T extends QueryBuilder> = {
   values: string[];
 }
 
-type Combinator<T extends QueryBuilder> = {
-  operator: 'and' | 'or';
+export type CombinatorOperator = 'and' | 'or';
+export type Combinator<T extends QueryBuilder> = {
+  operator: CombinatorOperator;
   conditions: ConditionTree<T>[];
 }
 

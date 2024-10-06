@@ -80,4 +80,5 @@ const tree = {
   ]
 } satisfies ConditionTree<typeof qb>;
 
+export type TestQueryBuilderType = typeof qb;
 export const queryString = queryTreeVisitor(tree);
