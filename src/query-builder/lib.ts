@@ -21,22 +21,18 @@ export type StringFieldsName<T extends QueryBuilder> = T extends QueryBuilder<in
   [K in keyof R]: R[K] extends StringField<infer N> ? N : never;
 }[keyof R] : never;
 
-export type StringCondition<T extends QueryBuilder> = StringBinaryCondition<T> | StringArrayCondition<T>;
+export type StringCondition<T extends QueryBuilder> = StringBinaryCondition<T>;
 
 export type StringBinaryCondition<T extends QueryBuilder> = {
+  kind: 'stringBinary';
   fieldName: StringFieldsName<T>;
   operator: 'eq' | 'neq' | 'contains' | 'startsWith' | 'endsWith';
   value: string;
 }
 
-export type StringArrayCondition<T extends QueryBuilder> = {
-  fieldName: StringFieldsName<T>;
-  operator: 'in' | 'notIn';
-  values: string[];
-}
-
 export type CombinatorOperator = 'and' | 'or';
 export type Combinator<T extends QueryBuilder> = {
+  kind: 'combinator';
   operator: CombinatorOperator;
   conditions: ConditionTree<T>[];
 }
